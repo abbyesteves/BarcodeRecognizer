@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ScannerLauncher.swift
 //  BarcodeRecognizer
 //
 //  Created by Abby Esteves on 18/04/2019.
@@ -12,10 +12,16 @@ import AVFoundation
 class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
- 
+    
+    lazy var infoDetail: InfoDetail = {
+        let launcher = InfoDetail()
+        return launcher
+    }()
+    
     // @objc funcs
     @objc func restart() {
         self.captureSession.startRunning()
+        self.infoDetail.close()
     }
     
     // private funcs / funcs
@@ -79,12 +85,19 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
                 if jsonRes!["success"] != nil {
                     let bool = (jsonRes!["success"])! as! Bool
                     if bool {
-                        let products = (jsonRes!["products"])! as! [[String:Any]]
-                        let name = products.first!["product_name"] as! String
-                        print(name)
+                        let products = jsonRes!["products"] as! [[String:Any]]
+                        if let product = products.first {
+                            let name = product["product_name"] as! String
+                            DispatchQueue.main.async(execute: {
+                                self.infoDetail.open(string: name, found : true)
+                            })
+                        }
+                        
                     } else {
                         let message = (jsonRes!["message"])! as! String
-                        print(message)
+                        DispatchQueue.main.async(execute: {
+                            self.infoDetail.open(string: message, found : false)
+                        })
                     }
                 }
                 
@@ -113,7 +126,6 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if (captureSession?.isRunning == false) {
             captureSession.startRunning()
         }
@@ -123,6 +135,9 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         super.viewWillDisappear(animated)
         if (captureSession?.isRunning == true) {
             captureSession.stopRunning()
+        } else {
+            self.captureSession.startRunning()
+            self.infoDetail.close()
         }
     }
     

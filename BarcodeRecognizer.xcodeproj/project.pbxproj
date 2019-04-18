@@ -17,6 +17,8 @@
 		75EA106C226811B7004E0C6B /* BarcodeRecognizerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA106B226811B7004E0C6B /* BarcodeRecognizerUITests.swift */; };
 		75EA107D226828EE004E0C6B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA107C226828EE004E0C6B /* Service.swift */; };
 		75EA108022683E9C004E0C6B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA107F22683E9C004E0C6B /* Models.swift */; };
+		75EA1088226863C1004E0C6B /* InfoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA1087226863C1004E0C6B /* InfoDetail.swift */; };
+		75EA108A22686552004E0C6B /* Layouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA108922686552004E0C6B /* Layouts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		75EA106D226811B7004E0C6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75EA107C226828EE004E0C6B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		75EA107F22683E9C004E0C6B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		75EA1087226863C1004E0C6B /* InfoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDetail.swift; sourceTree = "<group>"; };
+		75EA108922686552004E0C6B /* Layouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layouts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,10 +107,12 @@
 		75EA1047226811B5004E0C6B /* BarcodeRecognizer */ = {
 			isa = PBXGroup;
 			children = (
+				75EA108622686398004E0C6B /* Detail */,
 				75EA107A226828B9004E0C6B /* Service */,
 				75EA107B226828C8004E0C6B /* Launchers */,
 				75EA104C226811B5004E0C6B /* Main.storyboard */,
 				75EA1048226811B5004E0C6B /* AppDelegate.swift */,
+				75EA108922686552004E0C6B /* Layouts.swift */,
 				75EA107F22683E9C004E0C6B /* Models.swift */,
 				75EA1052226811B7004E0C6B /* Assets.xcassets */,
 				75EA1054226811B7004E0C6B /* LaunchScreen.storyboard */,
@@ -148,6 +154,14 @@
 				75EA104A226811B5004E0C6B /* ScannerLauncher.swift */,
 			);
 			path = Launchers;
+			sourceTree = "<group>";
+		};
+		75EA108622686398004E0C6B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				75EA1087226863C1004E0C6B /* InfoDetail.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +295,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75EA1088226863C1004E0C6B /* InfoDetail.swift in Sources */,
+				75EA108A22686552004E0C6B /* Layouts.swift in Sources */,
 				75EA1051226811B5004E0C6B /* BarcodeRecognizer.xcdatamodeld in Sources */,
 				75EA107D226828EE004E0C6B /* Service.swift in Sources */,
 				75EA104B226811B5004E0C6B /* ScannerLauncher.swift in Sources */,
