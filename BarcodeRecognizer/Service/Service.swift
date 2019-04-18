@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SystemConfiguration
 
 class Service {
     let apiKey = "L6ywXGcACUQmQslp8s4GpCZgTY45-bg1nHt8k_in"
@@ -36,7 +37,12 @@ class Service {
     func urlSession(request : URLRequest, completion : @escaping(Data?) ->Void) {
         URLSession.shared.dataTask(with: request){
             (data, response, err) in
-            print(" response : ",response!)
+            
+            if response == nil {
+                completion(nil)
+            } else {
+                print(" response : ",response!)
+            }
             if data != nil {
                 completion(data)
             }

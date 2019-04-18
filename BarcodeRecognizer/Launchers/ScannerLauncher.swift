@@ -80,30 +80,34 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         // GET barcode data frfom api
         Service().LookupBarcode(barcode : code, completion: {
             (data) in
-            do {
-                let jsonRes = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as AnyObject?
-                if jsonRes!["success"] != nil {
-                    let bool = (jsonRes!["success"])! as! Bool
-                    if bool {
-                        let products = jsonRes!["products"] as! [[String:Any]]
-                        if let product = products.first {
-                            let name = product["product_name"] as! String
+            if data != nil {
+                do {
+                    let jsonRes = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as AnyObject?
+                    if jsonRes!["success"] != nil {
+                        let bool = (jsonRes!["success"])! as! Bool
+                        if bool {
+                            let products = jsonRes!["products"] as! [[String:Any]]
+                            if let product = products.first {
+                                let name = product["product_name"] as! String
+                                DispatchQueue.main.async(execute: {
+                                    self.infoDetail.open(string: name, found : true)
+                                })
+                            }
+                            
+                        } else {
+                            let message = (jsonRes!["message"])! as! String
                             DispatchQueue.main.async(execute: {
-                                self.infoDetail.open(string: name, found : true)
+                                self.infoDetail.open(string: message, found : false)
                             })
                         }
-                        
-                    } else {
-                        let message = (jsonRes!["message"])! as! String
-                        DispatchQueue.main.async(execute: {
-                            self.infoDetail.open(string: message, found : false)
-                        })
                     }
+                    
+                } catch {
+                    self.failedToGet()
                 }
-                
-            } catch {
+            } else {
+                self.failedToGet()
             }
-            
             // *transfer all json to MODEL object instead
 //            do {
 //                let model = try JSONDecoder().decode(Product.self, from: data!)
@@ -111,6 +115,14 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
 //            } catch let err{
 //                print(" into model form err : ",err.localizedDescription)
 //            }
+        })
+    }
+    
+    func failedToGet(){
+        let massages = ["Cannot Retrieve Data", "Check you connectivity", "Something went wrong", "Are you offline?", "Make sure you are connected"]
+        let index = Int(arc4random_uniform(UInt32(massages.count)))
+        DispatchQueue.main.async(execute: {
+            self.infoDetail.open(string: massages[index], found : false)
         })
     }
     
