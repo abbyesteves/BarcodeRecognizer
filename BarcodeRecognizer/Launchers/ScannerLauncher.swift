@@ -12,8 +12,7 @@ import AVFoundation
 class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
-    var product = Product()
-    
+ 
     // @objc funcs
     @objc func restart() {
         self.captureSession.startRunning()
@@ -72,6 +71,34 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
     func found(code : String){
         print(" found code : ", code)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(restart)))
+        // GET barcode data frfom api
+        Service().LookupBarcode(barcode : code, completion: {
+            (data) in
+            do {
+                let jsonRes = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as AnyObject?
+                if jsonRes!["success"] != nil {
+                    let bool = (jsonRes!["success"])! as! Bool
+                    if bool {
+                        let products = (jsonRes!["products"])! as! [[String:Any]]
+                        let name = products.first!["product_name"] as! String
+                        print(name)
+                    } else {
+                        let message = (jsonRes!["message"])! as! String
+                        print(message)
+                    }
+                }
+                
+            } catch {
+            }
+            
+            // *transfer all json to MODEL object instead
+//            do {
+//                let model = try JSONDecoder().decode(Product.self, from: data!)
+//                print(" into model form ", model.products)
+//            } catch let err{
+//                print(" into model form err : ",err.localizedDescription)
+//            }
+        })
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
