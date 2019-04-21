@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import AVFoundation
 
 class InfoDetail: UIViewController {
+    
     let paddingValue = CGFloat(10)
+    var speechSynthesizer = AVSpeechSynthesizer()
     
     //
     let infoButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(white: 0, alpha: 0.8)
-        button.titleLabel?.font = .systemFont(ofSize: 18)
+        button.titleLabel?.font = .systemFont(ofSize: 15)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setTitle("more information".capitalized, for: .normal)
         button.layer.cornerRadius = 15
@@ -55,7 +58,7 @@ class InfoDetail: UIViewController {
         // init constraints
         infoView.frame = CGRect(x: 20, y: -view.frame.height/5, width: view.frame.width-40, height: view.frame.height/5)
         infoLabel.frame = CGRect(x: 0, y: 0, width: infoView.frame.width, height: infoView.frame.height)
-        infoButton.frame = CGRect(x: 20, y: infoView.frame.maxY+2, width:  view.frame.width-40, height: 50)
+        infoButton.frame = CGRect(x: 20, y: infoView.frame.maxY+2, width:  view.frame.width-40, height: 40)
     }
     
     func open(string : String, found : Bool){
@@ -81,8 +84,20 @@ class InfoDetail: UIViewController {
                 self.infoView.frame = CGRect(x: self.infoView.frame.minX, y: Layouts().navbarStatusHeight+self.paddingValue, width: self.infoView.frame.width, height: self.infoView.frame.height)
                 self.infoLabel.frame = CGRect(x: 0, y: 0, width: self.infoView.frame.width, height: self.infoView.frame.height)
                 self.infoButton.frame = CGRect(x: self.infoButton.frame.minX, y: self.infoView.frame.maxY+2, width:  self.infoButton.frame.width, height: self.infoButton.frame.height)
-             }, completion: { (Bool) in })
+             }, completion: { (Bool) in
+                self.dictate(message : string)
+             })
         }
+    }
+    
+    func dictate(message : String) {
+        if self.speechSynthesizer.isSpeaking {
+            self.speechSynthesizer.stopSpeaking(at: .immediate)
+        }
+        let speechUtterance: AVSpeechUtterance = AVSpeechUtterance(string: message)
+        speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 2.0
+        speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        self.speechSynthesizer.speak(speechUtterance)
     }
     
     func close() {

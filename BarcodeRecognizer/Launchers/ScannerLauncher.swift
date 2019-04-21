@@ -14,6 +14,7 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
     var previewLayer: AVCaptureVideoPreviewLayer!
     var isOn = false
     var holdCode = String()
+    var audioPlayer = AVAudioPlayer()
     
     lazy var infoDetail: InfoDetail = {
         let launcher = InfoDetail()
@@ -50,25 +51,41 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
     }()
     
     // @objc funcs
-    @objc func restart() {
-        self.captureSession.startRunning()
-    }
-    
     @objc func barScanTapped(sender : UITapGestureRecognizer) {
         let button = sender.view as! UIButton
         if self.isOn {
             self.isOn = false
             self.infoDetail.close()
             self.holdCode = String()
+            self.soundEffects(fileName : "se_ButtonOff", loop : false)
             button.backgroundColor = UIColor(white: 0, alpha: 0.8)
-            
         } else {
             self.isOn = true
+            self.soundEffects(fileName : "se_ButtonOn", loop : false)
             button.backgroundColor = UIColor.rgba(red: 206, green: 73, blue: 73, alpha: 0.8)
         }
     }
     
     // private funcs / funcs
+    func soundEffects(fileName : String, loop : Bool) {
+        guard let sound = Bundle.main.path(forResource: fileName, ofType: "mp3") else { return }
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound))
+            if loop {
+                audioPlayer.numberOfLoops = -1
+            } else {
+                audioPlayer.numberOfLoops = 0
+            }
+            if audioPlayer.isPlaying {
+                audioPlayer.stop()
+            } else {
+                audioPlayer.play()
+            }
+        } catch {
+            print(" error get bundle ", error)
+        }
+    }
+    
     func setup(){
         captureSession = AVCaptureSession()
         
@@ -138,6 +155,7 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
     func found(code : String){
         if holdCode != code {
             print(" found code : ", code)
+            self.soundEffects(fileName : "se_Beep", loop : true)
             holdCode = code
             // GET barcode data frfom api
             Service().LookupBarcode(barcode : code, completion: {
@@ -147,6 +165,7 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
                         let jsonRes = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as AnyObject?
                         if jsonRes!["success"] != nil {
                             let bool = (jsonRes!["success"])! as! Bool
+                            self.soundEffects(fileName : "se_Bell", loop : false)
                             if bool {
                                 let products = jsonRes!["products"] as! [[String:Any]]
                                 if let product = products.first {
@@ -163,24 +182,21 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
                                 })
                             }
                         }
-                        
                     } catch {
                         self.failedToGet()
                     }
                 } else {
                     self.failedToGet()
                 }
-                // *transfer all json to MODEL object instead
-                //            do {
-                //                let model = try JSONDecoder().decode(Product.self, from: data!)
-                //                print(" into model form ", model.products)
-                //            } catch let err{
-                //                print(" into model form err : ",err.localizedDescription)
-                //            }
+// *transfer all json to MODEL object instead
+//            do {
+//                let model = try JSONDecoder().decode(Product.self, from: data!)
+//                print(" into model form ", model.products)
+//            } catch let err{
+//                print(" into model form err : ",err.localizedDescription)
+//            }
             })
         }
-        
-//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(restart)))
     }
     
     func failedToGet(){
@@ -214,6 +230,8 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         super.viewWillDisappear(animated)
         if (captureSession?.isRunning == true) {
             captureSession.stopRunning()
+            self.infoDetail.close()
+            self.holdCode = String()
         } else {
             self.captureSession.startRunning()
             self.infoDetail.close()
@@ -228,7 +246,5 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         super.viewDidLoad()
         self.setup()
     }
-
-
 }
 
