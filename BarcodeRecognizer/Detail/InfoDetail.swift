@@ -23,15 +23,6 @@ class InfoDetail: UIViewController {
         return button
     }()
     
-    let statusLabel : UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textAlignment = .center
-        label.text = "Tap to rescan"
-        return label
-    }()
-    
     let infoView : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(white: 0, alpha: 0.8)
@@ -64,8 +55,7 @@ class InfoDetail: UIViewController {
         // init constraints
         infoView.frame = CGRect(x: 20, y: -view.frame.height/5, width: view.frame.width-40, height: view.frame.height/5)
         infoLabel.frame = CGRect(x: 0, y: 0, width: infoView.frame.width, height: infoView.frame.height)
-        infoButton.frame = CGRect(x: 20, y: infoView.frame.maxY+2, width:  view.frame.width-40, height: 60)
-        statusLabel.frame = CGRect(x: 20, y: view.frame.height, width: view.frame.width-40, height: 50)
+        infoButton.frame = CGRect(x: 20, y: infoView.frame.maxY+2, width:  view.frame.width-40, height: 50)
     }
     
     func open(string : String, found : Bool){
@@ -75,8 +65,7 @@ class InfoDetail: UIViewController {
             
             Layouts().addToView(whereTo: window, addViews: [
                 infoView,
-                infoButton,
-                statusLabel
+                infoButton
             ])
             infoView.addSubview(infoLabel)
             
@@ -92,7 +81,6 @@ class InfoDetail: UIViewController {
                 self.infoView.frame = CGRect(x: self.infoView.frame.minX, y: Layouts().navbarStatusHeight+self.paddingValue, width: self.infoView.frame.width, height: self.infoView.frame.height)
                 self.infoLabel.frame = CGRect(x: 0, y: 0, width: self.infoView.frame.width, height: self.infoView.frame.height)
                 self.infoButton.frame = CGRect(x: self.infoButton.frame.minX, y: self.infoView.frame.maxY+2, width:  self.infoButton.frame.width, height: self.infoButton.frame.height)
-                self.statusLabel.frame = CGRect(x: self.statusLabel.frame.minX, y: self.view.frame.height-(self.statusLabel.frame.height+Layouts().bottomSpacing!+self.paddingValue), width: self.statusLabel.frame.width, height: self.statusLabel.frame.height)
              }, completion: { (Bool) in })
         }
     }
@@ -104,7 +92,6 @@ class InfoDetail: UIViewController {
             self.infoView.frame = CGRect(x: self.infoView.frame.minX, y: -self.infoView.frame.height, width: self.infoView.frame.width, height: self.infoView.frame.height)
             self.infoLabel.frame = CGRect(x: 0, y: 0, width: self.infoView.frame.width, height: self.infoView.frame.height)
             self.infoButton.frame = CGRect(x: self.infoButton.frame.minX, y: self.infoView.frame.maxY+2, width:  self.infoButton.frame.width, height: self.infoButton.frame.height)
-            self.statusLabel.frame = CGRect(x: self.statusLabel.frame.minX, y: self.view.frame.height, width: self.statusLabel.frame.width, height: self.statusLabel.frame.height)
         }, completion: { (Bool) in })
     }
 }
