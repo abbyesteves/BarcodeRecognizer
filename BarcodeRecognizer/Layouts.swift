@@ -11,7 +11,7 @@ import UIKit
 class Layouts {
     let navbarStatusHeight = UIApplication.shared.statusBarFrame.height
     let bottomSpacing = UIApplication.shared.keyWindow?.safeAreaInsets.bottom
-    
+    let navBarHeight = UINavigationController.init().navigationBar.frame.height
     //
     func addToView(whereTo: Optional<UIView>, addViews : [Optional<UIView>]) {
         for addView in addViews {

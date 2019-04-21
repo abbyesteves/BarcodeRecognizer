@@ -125,8 +125,6 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         barScanButton.addSubview(barScanImageView)
         barScanButton.addSubview(barScanLabel)
         //
-        view.gestureRecognizers?.removeAll()
-        //
         self.setupConstraints()
         self.setupGestures()
         // start
@@ -136,7 +134,7 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
     func setupConstraints() {
         let buttonSize = view.frame.width/4
         previewLayer.frame = view.layer.bounds
-        barScanButton.frame = CGRect(x: (view.frame.width/2)-(buttonSize/2), y: view.frame.height-(buttonSize+20), width: buttonSize, height: buttonSize)
+        barScanButton.frame = CGRect(x: (view.frame.width/2)-(buttonSize/2), y: view.frame.height-(buttonSize+20+Layouts().bottomSpacing!), width: buttonSize, height: buttonSize)
         barScanImageView.frame = CGRect(x: barScanButton.frame.width/4, y: (barScanButton.frame.height/4)-10, width: barScanButton.frame.width/2, height: barScanButton.frame.height/2)
         barScanLabel.frame = CGRect(x: 0, y: barScanImageView.frame.maxY, width: barScanButton.frame.width, height: 20)
     }
@@ -167,14 +165,15 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
                             let bool = (jsonRes!["success"])! as! Bool
                             self.soundEffects(fileName : "se_Bell", loop : false)
                             if bool {
-                                let products = jsonRes!["products"] as! [[String:Any]]
-                                if let product = products.first {
-                                    let name = product["product_name"] as! String
-                                    DispatchQueue.main.async(execute: {
-                                        self.infoDetail.open(string: name, found : true)
-                                    })
+                                if jsonRes!["products"] is [[String:Any]] {
+                                    let products = jsonRes!["products"] as? [[String:Any]]
+                                    if let product = products?.first {
+                                        self.getName(product : product)
+                                    }
+                                } else {
+                                    let product = jsonRes!["products"] as? [String:Any]
+                                    self.getName(product : product)
                                 }
-                                
                             } else {
                                 let message = (jsonRes!["message"])! as! String
                                 DispatchQueue.main.async(execute: {
@@ -197,6 +196,14 @@ class ScannerLauncher: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
 //            }
             })
         }
+    }
+    
+    func getName(product : [String:Any]?){
+        let name = product?["product_name"] as? String
+        let string = name != nil ? name : "No name"
+        DispatchQueue.main.async(execute: {
+            self.infoDetail.open(string: string!, found : true)
+        })
     }
     
     func failedToGet(){

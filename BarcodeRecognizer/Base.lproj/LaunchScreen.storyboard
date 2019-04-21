@@ -18,11 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="clF-99-FNU">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="clF-99-FNU">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O35-fN-inH">
-                                <rect key="frame" x="105" y="323" width="165" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O35-fN-inH">
+                                <rect key="frame" x="105" y="323" width="164" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Bar Code Scanner">
                                         <attributes>
@@ -37,16 +39,6 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.090196078430000007" green="0.29803921570000003" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="clF-99-FNU" firstAttribute="centerX" secondItem="O35-fN-inH" secondAttribute="centerX" id="4iD-CS-haN"/>
-                            <constraint firstItem="clF-99-FNU" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="74E-2L-urw"/>
-                            <constraint firstItem="clF-99-FNU" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="NF2-cX-r2L"/>
-                            <constraint firstItem="clF-99-FNU" firstAttribute="centerY" secondItem="O35-fN-inH" secondAttribute="centerY" id="TG8-im-cCT"/>
-                            <constraint firstItem="O35-fN-inH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="jfg-GP-vWH"/>
-                            <constraint firstItem="O35-fN-inH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="303" id="x89-zh-b0X"/>
-                            <constraint firstItem="O35-fN-inH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="105" id="y12-xD-FK7"/>
-                            <constraint firstAttribute="trailing" secondItem="clF-99-FNU" secondAttribute="trailing" id="zOP-cT-k9n"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

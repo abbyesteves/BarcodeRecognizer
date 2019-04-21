@@ -32,17 +32,20 @@ class InfoDetail: UIViewController {
         return view
     }()
     
-    let infoLabel : UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.numberOfLines = 5
-        return label
+    let infoText : UITextView = {
+        let text = UITextView()
+        text.textAlignment = .center
+        text.textColor = .white
+        text.font = UIFont.boldSystemFont(ofSize: 18)
+        text.backgroundColor = .clear
+        text.isSelectable = false
+        text.isEditable = false
+        text.isScrollEnabled = false
+        return text
     }()
     
     @objc func openSafari(){
-        let search = self.infoLabel.text!.replacingOccurrences(of: " ", with: "+")
+        let search = self.infoText.text!.replacingOccurrences(of: " ", with: "+")
         UIApplication.shared.open(URL(string : "http://www.google.com/search?q=\(search)")! as URL, options: [:], completionHandler: nil)
     }
     
@@ -51,26 +54,29 @@ class InfoDetail: UIViewController {
         infoView.alpha = 0
         infoButton.alpha = 0
         
+        let size = CGSize(width: view.frame.width, height: view.frame.height-(Layouts().navbarStatusHeight+Layouts().navBarHeight+Layouts().bottomSpacing!+(view.frame.width/4)))
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let captionSize = NSString(string: infoText.text!).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 21)], context: nil)
+        let height = captionSize.height < 40 ? 40 : captionSize.height+10
         // gestures
         infoButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openSafari)))
         
-        
         // init constraints
-        infoView.frame = CGRect(x: 20, y: -view.frame.height/5, width: view.frame.width-40, height: view.frame.height/5)
-        infoLabel.frame = CGRect(x: 0, y: 0, width: infoView.frame.width, height: infoView.frame.height)
+        infoView.frame = CGRect(x: 20, y: -view.frame.height/5, width: view.frame.width-40, height: height+20)
+        infoText.frame = CGRect(x: 0, y: 10, width: infoView.frame.width, height: height)
         infoButton.frame = CGRect(x: 20, y: infoView.frame.maxY+2, width:  view.frame.width-40, height: 40)
     }
     
     func open(string : String, found : Bool){
+        infoText.text = string
         self.initLayout()
-        infoLabel.text = string
         if let window = UIApplication.shared.keyWindow {
             
             Layouts().addToView(whereTo: window, addViews: [
                 infoView,
                 infoButton
             ])
-            infoView.addSubview(infoLabel)
+            infoView.addSubview(infoText)
             
             // animate layout
              UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -82,7 +88,6 @@ class InfoDetail: UIViewController {
                     self.infoView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMaxXMinYCorner]
                 }
                 self.infoView.frame = CGRect(x: self.infoView.frame.minX, y: Layouts().navbarStatusHeight+self.paddingValue, width: self.infoView.frame.width, height: self.infoView.frame.height)
-                self.infoLabel.frame = CGRect(x: 0, y: 0, width: self.infoView.frame.width, height: self.infoView.frame.height)
                 self.infoButton.frame = CGRect(x: self.infoButton.frame.minX, y: self.infoView.frame.maxY+2, width:  self.infoButton.frame.width, height: self.infoButton.frame.height)
              }, completion: { (Bool) in
                 self.dictate(message : string)
@@ -105,7 +110,6 @@ class InfoDetail: UIViewController {
             self.infoView.alpha = 0
             self.infoButton.alpha = 0
             self.infoView.frame = CGRect(x: self.infoView.frame.minX, y: -self.infoView.frame.height, width: self.infoView.frame.width, height: self.infoView.frame.height)
-            self.infoLabel.frame = CGRect(x: 0, y: 0, width: self.infoView.frame.width, height: self.infoView.frame.height)
             self.infoButton.frame = CGRect(x: self.infoButton.frame.minX, y: self.infoView.frame.maxY+2, width:  self.infoButton.frame.width, height: self.infoButton.frame.height)
         }, completion: { (Bool) in })
     }
