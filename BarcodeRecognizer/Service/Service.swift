@@ -14,13 +14,15 @@ class Service {
     let lookupUrl = "https://www.buycott.com/api/v4/products/lookup"
     
     // setup urlresuest
-    func urlRequest(url : URL, method: String, parameters : [String:Any]?, timeoutInterval : Double, headers: [String:String]) -> URLRequest? {
+    func urlRequest(url : URL, method: String, parameters : [String:Any]?, timeoutInterval : Double, headers: [String:String]?) -> URLRequest? {
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.timeoutInterval = timeoutInterval
         // adding the header
-        for header in headers {
-            request.setValue(header.key, forHTTPHeaderField: header.value)
+        if headers != nil {
+            for header in headers! {
+                request.setValue(header.key, forHTTPHeaderField: header.value)
+            }
         }
         // adding body
         if parameters != nil {
@@ -30,6 +32,7 @@ class Service {
                 return nil
             }
         }
+        
         return request
     }
     

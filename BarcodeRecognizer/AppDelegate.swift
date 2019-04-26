@@ -20,10 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //NOTE * We're not using storyboards
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: ScannerLauncher())
+        window?.rootViewController = UINavigationController(rootViewController: TabBarController())//ScannerLauncher HelpController
         //removing navigation bar
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.white]
         return true
     }
     

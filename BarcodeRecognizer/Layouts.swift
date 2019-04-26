@@ -1,5 +1,5 @@
 //
-//  Layouts.swift
+//  Layout.swift
 //  BarcodeRecognizer
 //
 //  Created by Abby Esteves on 18/04/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Layouts {
+class Layout {
     let navbarStatusHeight = UIApplication.shared.statusBarFrame.height
     let bottomSpacing = UIApplication.shared.keyWindow?.safeAreaInsets.bottom
     let navBarHeight = UINavigationController.init().navigationBar.frame.height

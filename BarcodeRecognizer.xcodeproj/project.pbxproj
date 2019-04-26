@@ -12,9 +12,11 @@
 		756E9658226C81AB009A0202 /* se_ButtonOn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 756E9657226C81AB009A0202 /* se_ButtonOn.mp3 */; };
 		756E9660226C88B3009A0202 /* se_Beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 756E965F226C88B3009A0202 /* se_Beep.mp3 */; };
 		756E9662226C896F009A0202 /* se_Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 756E9661226C896F009A0202 /* se_Bell.mp3 */; };
+		756E96642271AD51009A0202 /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 756E96632271AD50009A0202 /* Resnet50.mlmodel */; };
+		756E96662271EDC6009A0202 /* HelpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756E96652271EDC6009A0202 /* HelpController.swift */; };
+		756E966A2273015A009A0202 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756E96692273015A009A0202 /* TabBarController.swift */; };
 		75EA1049226811B5004E0C6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA1048226811B5004E0C6B /* AppDelegate.swift */; };
 		75EA104B226811B5004E0C6B /* ScannerLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA104A226811B5004E0C6B /* ScannerLauncher.swift */; };
-		75EA104E226811B5004E0C6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75EA104C226811B5004E0C6B /* Main.storyboard */; };
 		75EA1051226811B5004E0C6B /* BarcodeRecognizer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75EA104F226811B5004E0C6B /* BarcodeRecognizer.xcdatamodeld */; };
 		75EA1053226811B7004E0C6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75EA1052226811B7004E0C6B /* Assets.xcassets */; };
 		75EA1056226811B7004E0C6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75EA1054226811B7004E0C6B /* LaunchScreen.storyboard */; };
@@ -23,7 +25,7 @@
 		75EA107D226828EE004E0C6B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA107C226828EE004E0C6B /* Service.swift */; };
 		75EA108022683E9C004E0C6B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA107F22683E9C004E0C6B /* Models.swift */; };
 		75EA1088226863C1004E0C6B /* InfoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA1087226863C1004E0C6B /* InfoDetail.swift */; };
-		75EA108A22686552004E0C6B /* Layouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA108922686552004E0C6B /* Layouts.swift */; };
+		75EA108A22686552004E0C6B /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA108922686552004E0C6B /* Layout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,10 +51,12 @@
 		756E9657226C81AB009A0202 /* se_ButtonOn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se_ButtonOn.mp3; sourceTree = "<group>"; };
 		756E965F226C88B3009A0202 /* se_Beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se_Beep.mp3; sourceTree = "<group>"; };
 		756E9661226C896F009A0202 /* se_Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se_Bell.mp3; sourceTree = "<group>"; };
+		756E96632271AD50009A0202 /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
+		756E96652271EDC6009A0202 /* HelpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpController.swift; sourceTree = "<group>"; };
+		756E96692273015A009A0202 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		75EA1045226811B5004E0C6B /* BarcodeRecognizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarcodeRecognizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75EA1048226811B5004E0C6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75EA104A226811B5004E0C6B /* ScannerLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerLauncher.swift; sourceTree = "<group>"; };
-		75EA104D226811B5004E0C6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		75EA1050226811B5004E0C6B /* BarcodeRecognizer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarcodeRecognizer.xcdatamodel; sourceTree = "<group>"; };
 		75EA1052226811B7004E0C6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75EA1055226811B7004E0C6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -66,7 +70,7 @@
 		75EA107C226828EE004E0C6B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		75EA107F22683E9C004E0C6B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		75EA1087226863C1004E0C6B /* InfoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDetail.swift; sourceTree = "<group>"; };
-		75EA108922686552004E0C6B /* Layouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layouts.swift; sourceTree = "<group>"; };
+		75EA108922686552004E0C6B /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +101,22 @@
 		756E9652226C7CC2009A0202 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				756E96632271AD50009A0202 /* Resnet50.mlmodel */,
 				756E9654226C7D48009A0202 /* se_ButtonOff.mp3 */,
 				756E9657226C81AB009A0202 /* se_ButtonOn.mp3 */,
 				756E9661226C896F009A0202 /* se_Bell.mp3 */,
 				756E965F226C88B3009A0202 /* se_Beep.mp3 */,
 			);
 			path = Files;
+			sourceTree = "<group>";
+		};
+		756E966B2273015F009A0202 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				756E96652271EDC6009A0202 /* HelpController.swift */,
+				756E96692273015A009A0202 /* TabBarController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		75EA103C226811B5004E0C6B = {
@@ -131,9 +145,9 @@
 				75EA108622686398004E0C6B /* Detail */,
 				75EA107A226828B9004E0C6B /* Service */,
 				75EA107B226828C8004E0C6B /* Launchers */,
-				75EA104C226811B5004E0C6B /* Main.storyboard */,
+				756E966B2273015F009A0202 /* Controllers */,
 				75EA1048226811B5004E0C6B /* AppDelegate.swift */,
-				75EA108922686552004E0C6B /* Layouts.swift */,
+				75EA108922686552004E0C6B /* Layout.swift */,
 				756E9650226C61A7009A0202 /* Extension.swift */,
 				75EA107F22683E9C004E0C6B /* Models.swift */,
 				756E9652226C7CC2009A0202 /* Files */,
@@ -297,7 +311,6 @@
 				756E9662226C896F009A0202 /* se_Bell.mp3 in Resources */,
 				75EA1053226811B7004E0C6B /* Assets.xcassets in Resources */,
 				756E9656226C7D48009A0202 /* se_ButtonOff.mp3 in Resources */,
-				75EA104E226811B5004E0C6B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,10 +336,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				75EA1088226863C1004E0C6B /* InfoDetail.swift in Sources */,
-				75EA108A22686552004E0C6B /* Layouts.swift in Sources */,
+				756E96642271AD51009A0202 /* Resnet50.mlmodel in Sources */,
+				75EA108A22686552004E0C6B /* Layout.swift in Sources */,
+				756E966A2273015A009A0202 /* TabBarController.swift in Sources */,
 				75EA1051226811B5004E0C6B /* BarcodeRecognizer.xcdatamodeld in Sources */,
 				75EA107D226828EE004E0C6B /* Service.swift in Sources */,
 				75EA104B226811B5004E0C6B /* ScannerLauncher.swift in Sources */,
+				756E96662271EDC6009A0202 /* HelpController.swift in Sources */,
 				75EA1049226811B5004E0C6B /* AppDelegate.swift in Sources */,
 				75EA108022683E9C004E0C6B /* Models.swift in Sources */,
 				756E9651226C61A7009A0202 /* Extension.swift in Sources */,
@@ -365,14 +381,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		75EA104C226811B5004E0C6B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				75EA104D226811B5004E0C6B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		75EA1054226811B7004E0C6B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

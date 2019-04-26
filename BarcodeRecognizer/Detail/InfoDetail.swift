@@ -54,7 +54,7 @@ class InfoDetail: UIViewController {
         infoView.alpha = 0
         infoButton.alpha = 0
         
-        let size = CGSize(width: view.frame.width, height: view.frame.height-(Layouts().navbarStatusHeight+Layouts().navBarHeight+Layouts().bottomSpacing!+(view.frame.width/4)))
+        let size = CGSize(width: view.frame.width, height: view.frame.height-(Layout().navbarStatusHeight+Layout().navBarHeight+Layout().bottomSpacing!+(view.frame.width/4)))
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         let captionSize = NSString(string: infoText.text!).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 21)], context: nil)
         let height = captionSize.height < 40 ? 40 : captionSize.height+10
@@ -72,7 +72,7 @@ class InfoDetail: UIViewController {
         self.initLayout()
         if let window = UIApplication.shared.keyWindow {
             
-            Layouts().addToView(whereTo: window, addViews: [
+            Layout().addToView(whereTo: window, addViews: [
                 infoView,
                 infoButton
             ])
@@ -87,7 +87,7 @@ class InfoDetail: UIViewController {
                 } else {
                     self.infoView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMaxXMinYCorner]
                 }
-                self.infoView.frame = CGRect(x: self.infoView.frame.minX, y: Layouts().navbarStatusHeight+self.paddingValue, width: self.infoView.frame.width, height: self.infoView.frame.height)
+                self.infoView.frame = CGRect(x: self.infoView.frame.minX, y: Layout().navbarStatusHeight+self.paddingValue, width: self.infoView.frame.width, height: self.infoView.frame.height)
                 self.infoButton.frame = CGRect(x: self.infoButton.frame.minX, y: self.infoView.frame.maxY+2, width:  self.infoButton.frame.width, height: self.infoButton.frame.height)
              }, completion: { (Bool) in
                 self.dictate(message : string)

@@ -29,3 +29,14 @@ struct Products : Decodable {
     var brand_image_url : String?
     var country_of_origin : String?
 }
+
+struct Helps : Decodable {
+    var header : String?
+    var under : [Labels]
+}
+
+struct Labels : Decodable {
+    var title : String?
+    var subTitle : String?
+    var icons : String?
+}
